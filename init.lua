@@ -1,6 +1,6 @@
 local USES = 100
 
-local function chest_input(user, chest, pos)
+local function chest_input(user, pos)
 	local meta = minetest.get_meta(pos)
 	local chestinv = meta:get_inventory()
 	local userinv = user:get_inventory()
@@ -23,7 +23,7 @@ local function chest_input(user, chest, pos)
 	end
 end
 
-local function chest_output(user, chest, pos)
+local function chest_output(user, pos)
 	local meta = minetest.get_meta(pos)
 	local chestinv = meta:get_inventory()
 	local userinv = user:get_inventory()
@@ -55,7 +55,7 @@ minetest.register_tool("fast_chest:chest_stick", {
 		if pointed_thing.type == "node" then
 			local node = minetest.get_node(pointed_thing.under)
 			if node.name == "default:chest" or (node.name == "default:chest_locked" and minetest.get_meta(pointed_thing.under):get_string("owner") == user:get_player_name()) then
-				chest_input(user, node, pointed_thing.under)
+				chest_input(user, pointed_thing.under)
 			end
 		end
 		if not minetest.setting_getbool("creative_mode") then
@@ -67,7 +67,7 @@ minetest.register_tool("fast_chest:chest_stick", {
 		if pointed_thing.type == "node" then
 			local node = minetest.get_node(pointed_thing.under)
 			if node.name == "default:chest" or (node.name == "default:chest_locked" and minetest.get_meta(pointed_thing.under):get_string("owner") == user:get_player_name()) then
-				chest_output(user, node, pointed_thing.under)
+				chest_output(user, pointed_thing.under)
 			end
 		end
 		if not minetest.setting_getbool("creative_mode") then
